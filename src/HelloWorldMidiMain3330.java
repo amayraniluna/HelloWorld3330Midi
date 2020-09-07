@@ -45,6 +45,10 @@ public class HelloWorldMidiMain3330 extends PApplet {
 	public void setup() {
 		fill(120, 50, 240);
 
+		// create generator for pitch and rhythm
+		ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
+		ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
+		
 		// returns a url
 		String filePath = getPath("mid/gardel_por.mid");
 		// playMidiFile(filePath);
@@ -55,12 +59,15 @@ public class HelloWorldMidiMain3330 extends PApplet {
 
 //		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 		midiNotes.setWhichLine(0);
+		
+		//training
+		pitchGenerator.train(midiNotes.getPitchArray());
+		rhythmGenerator.train(midiNotes.getRhythmArray());
 
 		player = new MelodyPlayer(this, 100.0f);
-
 		player.setup();
-		player.setMelody(midiNotes.getPitchArray());
-		player.setRhythm(midiNotes.getRhythmArray());
+		player.setMelody( pitchGenerator.generate(20) );
+		player.setRhythm( rhythmGenerator.generate(20) );
 	}
 
 	public void draw() {
