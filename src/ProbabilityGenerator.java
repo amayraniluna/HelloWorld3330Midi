@@ -18,22 +18,23 @@ public class ProbabilityGenerator<T> {
 	
 //it is training probability generator with new data 
 	void train(ArrayList<T> newTokens){
-		//filling in alphabet + alphabet_count list
-		//************************************
-		//*******LEFT OFF RIGHT HERE**********
-		//************************************
-		
+	   //filling in alphabet + alphabet_count list
 		for(int i = 0; i < newTokens.size() ; i++){
+			T currToken = newTokens.get(i);	
+		
 			for(int j = 0; j < alphabet.size(); j++){
-				
-				if((newTokens.get(i)).equals(alphabet.get(j))){
-						//adds 1 to alphabet_count
-						int newCount = alphabet_counts.get(j) + 1;
-						alphabet_counts.set(j, newCount);
+				if(currToken.equals(alphabet.get(j))){
+					//adding alph_counts for repeated tokens
+					int newCount = alphabet_counts.get(j) + 1;
+					alphabet_counts.set(j, newCount);
+					break;
 				}
 					else {
-						alphabet.add(newTokens.get(i));
-						alphabet_counts.add(1);
+						if(j == alphabet.size() - 1){
+							//adding unique tokens to alphabet
+							alphabet.add(currToken);
+							alphabet_counts.add(1);
+						}
 					}
 			}
 				
