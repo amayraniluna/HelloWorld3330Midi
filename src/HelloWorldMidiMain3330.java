@@ -44,14 +44,15 @@ public class HelloWorldMidiMain3330 extends PApplet {
 	//doing all the setup stuff
 	public void setup() {
 		fill(120, 50, 240);
-
+		
+		
 		// create generator for pitch and rhythm
 		ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
 		ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
 		
 		// returns a url
-		String filePath = getPath("mid/gardel_por.mid");
-		// playMidiFile(filePath);
+		String filePath = getPath("mid/MaryHadALittleLamb.mid");
+		//playMidiFile(filePath);
 
 		midiNotes = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
 													//be created with "new". Note how every object is a pointer or reference. Every. single. one.
@@ -61,13 +62,18 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		midiNotes.setWhichLine(0);
 		
 		//training
+		System.out.println(" ");
+		System.out.println(midiNotes.getPitchArray());
+		
 		pitchGenerator.train(midiNotes.getPitchArray());
 		rhythmGenerator.train(midiNotes.getRhythmArray());
+		
+	   
 
 		player = new MelodyPlayer(this, 100.0f);
 		player.setup();
-		player.setMelody( pitchGenerator.generate(20) );
-		player.setRhythm( rhythmGenerator.generate(20) );
+		//player.setMelody( pitchGenerator.generate(20) );
+		//player.setRhythm( rhythmGenerator.generate(20) );
 	}
 
 	public void draw() {
