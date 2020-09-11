@@ -14,7 +14,7 @@ public class ProbabilityGenerator<T> {
 	ProbabilityGenerator()
 	{
 		alphabet = new ArrayList<T>();
-		alphabet_counts = new ArrayList<Integer>();// <--should I add 1???
+		alphabet_counts = new ArrayList<Integer>();
 		probDistributions = new ArrayList<Double>();
 
 	}
@@ -22,59 +22,45 @@ public class ProbabilityGenerator<T> {
 //it is training probability generator with new data 
 	void train(ArrayList<T> newTokens)
 	{
-		
+		int index;
+		int inputTokens = 0;
 	   //filling in alphabet + alphabet_count list
-		for(int i = 0; i < newTokens.size() ; i++)
+		for(int i = 0 ; i < newTokens.size() ; i++) 
 		{
-			
-			T currToken = newTokens.get(i);	
-			if(i == 0) {
-
-				alphabet.add(currToken);
-				alphabet_counts.add(1);
-				//System.out.println(alphabet.get(0));   		****LEFT OFF RIGHT HERE*****
-				//System.out.println(alphabet_counts.get(0));   *** testing to see where ***
-				//System.out.println("  ");						****  program reaches  *****
-				break;
-			}
-			for(int j = 0; j < alphabet.size(); j++)
+	        inputTokens++;
+			index = alphabet.indexOf(newTokens.get(i));
+			if(index == -1) 
 			{
-				
-				if(currToken.equals(alphabet.get(j)))
-				{
-					
-					//adding alph_counts for repeated tokens
-					int newCount = alphabet_counts.get(j) + 1;
-					alphabet_counts.set(j, newCount);
-					break;
-				}
-					else 
-					{
-						if(j == alphabet.size() - 1)
-						{
-							//adding unique tokens to alphabet
-							alphabet.add(currToken);
-							alphabet_counts.add(1);
-						}
-					}
+				index = alphabet.size();
+				alphabet.add(newTokens.get(i));
+				alphabet_counts.add(0);
 			}
-			//testing if alphabet and alphabet_counts were populated
-			System.out.print(alphabet.get(i));
-			System.out.print(" ");
-			System.out.print(alphabet_counts.get(i));
+			alphabet_counts.set(index, (alphabet_counts.get(index)) + 1);
 		}
 		
+	  
 		
-		//calculating probability distribution
-		for(int i = 0 ; i < alphabet.size() ; i++)
+	  //calculating probability distributions
+		for(int i = 0 ; i < alphabet_counts.size() ; i++) 
 		{
-			double probability = (alphabet_counts.get(i)) / (alphabet_counts.size());
+			double probability;
+			probability = (alphabet_counts.get(i)).floatValue() / inputTokens;
 			probDistributions.add(probability);
 		}
 		
-		
+
 	}
 	
+	
+	void print() {
+		System.out.println("-----Probability Distribution-----");
+		System.out.println();
+		for(int i = 0 ; i < probDistributions.size(); i++) {
+			System.out.println("Token: " + alphabet.get(i) + " | " + "Probability: " + probDistributions.get(i));
+		}
+		System.out.println("----------");
+		System.out.println();
+	}
 	
 	T generate() {
 		T newToken = null;

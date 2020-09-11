@@ -61,10 +61,9 @@ public class HelloWorldMidiMain3330 extends PApplet {
 //		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 		midiNotes.setWhichLine(0);
 		
-		//training
-		System.out.println(" ");
-		System.out.println(midiNotes.getPitchArray());
 		
+	
+		//training
 		pitchGenerator.train(midiNotes.getPitchArray());
 		rhythmGenerator.train(midiNotes.getRhythmArray());
 		
@@ -78,7 +77,10 @@ public class HelloWorldMidiMain3330 extends PApplet {
 
 	public void draw() {
 		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
-
+		
+		textSize(12);
+		fill(0, 102, 153);
+		text("Press 1 to start the unit test!", width/5, height/2);
 	}
 
 	//this finds the absolute path of a file
@@ -106,9 +108,24 @@ public class HelloWorldMidiMain3330 extends PApplet {
 
 	//this starts & restarts the melody.
 	public void keyPressed() {
+	   MidiFileToNotes midiNotesMary; //reads a midi file
+	  
+	   //returns a url
+	   String filePath = getPath("mid/MaryHadALittleLamb.mid");
+
+	   midiNotesMary = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
+															//be created with "new". Note how every object is a pointer or reference. Every. single. one.
+	
+	   // which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
+		midiNotesMary.setWhichLine(0);
+				
 		if (key == ' ') {
 			player.reset();
 			println("Melody started!");
+		}
+		else if(key == '1') {
+			pitchGenerator.print();
+			rhythmGenerator.print();
 		}
 	}
 }
