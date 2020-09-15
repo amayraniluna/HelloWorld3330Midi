@@ -16,14 +16,15 @@ public class ProbabilityGenerator<T> {
 		alphabet = new ArrayList<T>();
 		alphabet_counts = new ArrayList<Integer>();
 		probDistributions = new ArrayList<Double>();
-
 	}
 	
-//it is training probability generator with new data 
+	
+	
+  //it is training probability generator with new data 
 	void train(ArrayList<T> newTokens)
 	{
 		int index;
-		int inputTokens = 0;
+		double inputTokens = 0.0;
 	   //filling in alphabet + alphabet_count list
 		for(int i = 0 ; i < newTokens.size() ; i++) 
 		{
@@ -38,21 +39,19 @@ public class ProbabilityGenerator<T> {
 			alphabet_counts.set(index, (alphabet_counts.get(index)) + 1);
 		}
 		
-	  
-		
 	  //calculating probability distributions
 		for(int i = 0 ; i < alphabet_counts.size() ; i++) 
 		{
 			double probability;
-			probability = (alphabet_counts.get(i)).floatValue() / inputTokens;
+			probability = ((alphabet_counts.get(i)).floatValue()) / inputTokens;
 			probDistributions.add(probability);
 		}
-		
-
-	}
+	 }
 	
 	
-	void print() {
+	
+	void print() 
+	{
 		System.out.println("-----Probability Distribution-----");
 		System.out.println();
 		for(int i = 0 ; i < probDistributions.size(); i++) {
@@ -62,13 +61,44 @@ public class ProbabilityGenerator<T> {
 		System.out.println();
 	}
 	
-	T generate() {
+	
+	
+	
+	T generate() 
+	{
 		T newToken = null;
-		//do something here
+		ArrayList<Double> probDistributionSums = new ArrayList<Double>();
+		double sum = probDistributions.get(0);
+		
+	    //adding the sums of the probabilities
+		for(int i = 0; i < probDistributions.size() ; i++) 
+		{
+			probDistributionSums.add(sum);
+		    //adding probability value + next probability value
+			if(!(i == probDistributions.size()-1))
+				sum += probDistributions.get(i + 1);
+		}
+		
+		float rIndex = (float)Math.random();//generating random number
+		 
+		//determining newToken from random number
+		for(int i = 0 ; i < alphabet.size(); i++)
+		{
+			if(rIndex <= probDistributionSums.get(i))
+			{
+				newToken = alphabet.get(i);
+				break;
+			}
+		}
+			
 		return newToken;
 	}
 	
-	ArrayList<T> generate(int length){
+	
+	
+	
+	ArrayList<T> generate(int length)
+	{
 		ArrayList<T> newSequence = new ArrayList<T>();
 		for(int i = 0 ; i < length ; i++) {
 			newSequence.add(generate());

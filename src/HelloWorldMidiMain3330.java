@@ -82,7 +82,8 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		
 		textSize(12);
 		fill(0, 102, 153);
-		text("Press 1 to start the unit test!", width/5, height/2);
+		text("Press 1 to print probability distributions", width/10, height/3);
+		text("Press 2 to generate random melody tokens", width/11, height/2);
 	}
 
 	//this finds the absolute path of a file
@@ -123,8 +124,10 @@ public class HelloWorldMidiMain3330 extends PApplet {
 			println("Melody started!");
 		}
 		else if(key == '1') {
-			System.out.println(midiNotesMary.getPitchArray());
 			myTest.runUnit1(pitchGenerator, rhythmGenerator);
+		}
+		else if(key == '2') {
+			myTest.runUnit2(pitchGenerator, rhythmGenerator);
 		}
 	}
 }
