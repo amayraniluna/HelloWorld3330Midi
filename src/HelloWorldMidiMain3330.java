@@ -29,6 +29,10 @@ public class HelloWorldMidiMain3330 extends PApplet {
 	MelodyPlayer player; //play a midi sequence
 	MidiFileToNotes midiNotes; //read a midi file
 
+	//create generator for pitch and rhythm
+	ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
+	ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PApplet.main("HelloWorldMidiMain3330"); //change this to match above class & file name 
@@ -46,9 +50,7 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		fill(120, 50, 240);
 		
 		
-		// create generator for pitch and rhythm
-		ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
-		ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
+		
 		
 		// returns a url
 		String filePath = getPath("mid/MaryHadALittleLamb.mid");
@@ -71,12 +73,12 @@ public class HelloWorldMidiMain3330 extends PApplet {
 
 		player = new MelodyPlayer(this, 100.0f);
 		player.setup();
-		//player.setMelody( pitchGenerator.generate(20) );
-		//player.setRhythm( rhythmGenerator.generate(20) );
+		player.setMelody( pitchGenerator.generate(20) );
+		player.setRhythm( rhythmGenerator.generate(20) );
 	}
 
 	public void draw() {
-		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		//player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		
 		textSize(12);
 		fill(0, 102, 153);
@@ -108,24 +110,21 @@ public class HelloWorldMidiMain3330 extends PApplet {
 
 	//this starts & restarts the melody.
 	public void keyPressed() {
+	   Tests myTest = new Tests();
 	   MidiFileToNotes midiNotesMary; //reads a midi file
-	  
-	   //returns a url
-	   String filePath = getPath("mid/MaryHadALittleLamb.mid");
-
+	   String filePath = getPath("mid/MaryHadALittleLamb.mid");//returns a url
 	   midiNotesMary = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
 															//be created with "new". Note how every object is a pointer or reference. Every. single. one.
 	
-	   // which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
-		midiNotesMary.setWhichLine(0);
+		midiNotesMary.setWhichLine(0);// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 				
 		if (key == ' ') {
 			player.reset();
 			println("Melody started!");
 		}
 		else if(key == '1') {
-			pitchGenerator.print();
-			rhythmGenerator.print();
+			System.out.println(midiNotesMary.getPitchArray());
+			myTest.runUnit1(pitchGenerator, rhythmGenerator);
 		}
 	}
 }
