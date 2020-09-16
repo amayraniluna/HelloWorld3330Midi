@@ -19,6 +19,11 @@ public class ProbabilityGenerator<T> {
 	}
 	
 	
+	ArrayList<Double> getProbDistributions()
+	{
+		return probDistributions;
+	}
+	
 	
   //it is training probability generator with new data 
 	void train(ArrayList<T> newTokens)

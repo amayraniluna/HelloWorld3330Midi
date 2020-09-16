@@ -54,7 +54,7 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		
 		// returns a url
 		String filePath = getPath("mid/MaryHadALittleLamb.mid");
-		//playMidiFile(filePath);
+		playMidiFile(filePath);
 
 		midiNotes = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
 													//be created with "new". Note how every object is a pointer or reference. Every. single. one.
@@ -82,8 +82,9 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		
 		textSize(12);
 		fill(0, 102, 153);
-		text("Press 1 to print probability distributions", width/10, height/3);
-		text("Press 2 to generate random melody tokens", width/11, height/2);
+		text("Press 1 to print probability distributions", width/13, height/4);
+		text("Press 2 to generate random melodies", width/13, height/3);
+		text("Press 3 to generate 10,000 random melodies", width/13, height/2);
 	}
 
 	//this finds the absolute path of a file
@@ -128,6 +129,9 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		}
 		else if(key == '2') {
 			myTest.runUnit2(pitchGenerator, rhythmGenerator);
+		}
+		else if(key == '3') {
+			myTest.runUnit3(midiNotes);
 		}
 	}
 }
