@@ -131,7 +131,7 @@ public class HelloWorldMidiMain3330 extends PApplet {
 			myTest.runUnit2(pitchGenerator, rhythmGenerator);
 		}
 		else if(key == '3') {
-			myTest.runUnit3(midiNotes);
+			myTest.runUnit3(pitchGenerator, rhythmGenerator);
 		}
 	}
 }
