@@ -54,7 +54,7 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		
 		// returns a url
 		String filePath = getPath("mid/MaryHadALittleLamb.mid");
-		playMidiFile(filePath);
+		//playMidiFile(filePath);
 
 		midiNotes = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
 													//be created with "new". Note how every object is a pointer or reference. Every. single. one.

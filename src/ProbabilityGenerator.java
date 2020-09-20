@@ -59,6 +59,7 @@ public class ProbabilityGenerator<T> {
 	{
 		System.out.println("-----Probability Distribution-----");
 		System.out.println();
+		System.out.println("PD size: " + probDistributions.size());
 		for(int i = 0 ; i < probDistributions.size(); i++) {
 			System.out.println("Token: " + alphabet.get(i) + " | " + "Probability: " + probDistributions.get(i));
 		}

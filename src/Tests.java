@@ -21,19 +21,34 @@ public class Tests{
 		
 		void runUnit3(MidiFileToNotes song) 
 		{
+			//Pitch ProbGenerators
 			ProbabilityGenerator<Integer> pitchProbDistGen = new ProbabilityGenerator<Integer>();
 			ProbabilityGenerator<Integer> pitchGen = new ProbabilityGenerator<Integer>();
 			pitchGen.train(song.getPitchArray());
 			
+			//Rhythm probGenerators 
+			ProbabilityGenerator<Double> rhythmProbDistGen = new ProbabilityGenerator<Double>();
+			ProbabilityGenerator<Double> rhythmGen = new ProbabilityGenerator<Double>();
+			rhythmGen.train(song.getRhythmArray());
+			
+			
 			for(int i = 0 ; i < 10000 ; i++)
 			{
-				//generating 20 notes
+				//creating ArrayLists to store generated melodies
 				ArrayList<Integer> newSongPitches = new ArrayList<Integer>();
-				newSongPitches = pitchGen.generate(20);
-				pitchProbDistGen.train(newSongPitches);		
+				ArrayList<Double> newSongRhythms = new ArrayList<Double>();
+				
+				newSongPitches = pitchGen.generate(20);//generating 20 pitch notes
+				pitchProbDistGen.train(newSongPitches);//training on those^ 20 notes
+				
+				newSongRhythms = rhythmGen.generate(20);//generating 20 rhythm notes
+				rhythmProbDistGen.train(newSongRhythms);//training on those^ 20 notes 
 			}
-			System.out.println("Pitches: ");
-			pitchProbDistGen.print();
+			
+			//printing prob distributions
+			runUnit1(pitchProbDistGen, rhythmProbDistGen);
+			
+			
 		}
 
 }
