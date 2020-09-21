@@ -49,12 +49,9 @@ public class HelloWorldMidiMain3330 extends PApplet {
 	public void setup() {
 		fill(120, 50, 240);
 		
-		
-		
-		
 		// returns a url
-		String filePath = getPath("mid/MaryHadALittleLamb.mid");
-		//playMidiFile(filePath);
+		String filePath = getPath("mid/gardel_por.mid");
+		playMidiFile(filePath);
 
 		midiNotes = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
 													//be created with "new". Note how every object is a pointer or reference. Every. single. one.
@@ -63,14 +60,12 @@ public class HelloWorldMidiMain3330 extends PApplet {
 //		// which line to read in --> this object only reads one line (or ie, voice or ie, one instrument)'s worth of data from the file
 		midiNotes.setWhichLine(0);
 		
-		
 	
 		//training
 		pitchGenerator.train(midiNotes.getPitchArray());
 		rhythmGenerator.train(midiNotes.getRhythmArray());
 		
-	   
-
+	
 		player = new MelodyPlayer(this, 100.0f);
 		player.setup();
 		player.setMelody( pitchGenerator.generate(20) );
@@ -78,7 +73,7 @@ public class HelloWorldMidiMain3330 extends PApplet {
 	}
 
 	public void draw() {
-		//player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
+		player.play(); //play each note in the sequence -- the player will determine whether is time for a note onset
 		
 		textSize(12);
 		fill(0, 102, 153);
@@ -126,14 +121,10 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		}
 		else if(key == '1') {
 			myTest.runUnit1(pitchGenerator, rhythmGenerator);
-			playMidiFile(filePath);
+
 		}
 		else if(key == '2') {
 			myTest.runUnit2(pitchGenerator, rhythmGenerator);
-			player.reset();
-			player.setMelody(pitchGenerator.generate(20));
-			player.setRhythm(rhythmGenerator.generate(20));
-			player.play();
 		}
 		else if(key == '3') {
 			myTest.runUnit3(pitchGenerator, rhythmGenerator);
