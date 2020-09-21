@@ -43,51 +43,7 @@ public class Tests{
 				rhythmTrainer.train(newSongRhythm);//training on those^ melodies
 				
 			}
-				System.out.println(pitchTrainer.probDistributions.size());
-				System.out.println(rhythmTrainer.probDistributions.size());
 				
-			//runUnit1(pitchTrainer, rhythmTrainer);//printing probability distributions
-			
+			runUnit1(pitchTrainer, rhythmTrainer);//printing probability distributions
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*
-//Pitch ProbGenerators
-			ProbabilityGenerator<Integer> pitchProbDistGen = new ProbabilityGenerator<Integer>();
-			ProbabilityGenerator<Integer> pitchGen = new ProbabilityGenerator<Integer>();
-			pitchGen.train(song.getPitchArray());
-			
-			//Rhythm probGenerators 
-			ProbabilityGenerator<Double> rhythmProbDistGen = new ProbabilityGenerator<Double>();
-			ProbabilityGenerator<Double> rhythmGen = new ProbabilityGenerator<Double>();
-			rhythmGen.train(song.getRhythmArray());
-			
-			//creating ArrayLists to store generated melodies
-			
-		
-			for(int i = 0 ; i < 10000; i++)
-			{
-				ArrayList<Integer> newSongPitches = new ArrayList<Integer>();
-				ArrayList<Double> newSongRhythms = new ArrayList<Double>();
-				
-				newSongPitches = pitchGen.generate(20);//generating 20 pitch notes
-				pitchProbDistGen.train(newSongPitches);//training on those^ 20 notes
-				
-				newSongRhythms = rhythmGen.generate(20);//generating 20 rhythm notes
-				rhythmProbDistGen.train(newSongRhythms);//training on those^ 20 notes 
-			}
-			
-			//printing prob distributions
-			//runUnit1(pitchProbDistGen, rhythmProbDistGen);
-			
-			System.out.println(pitchProbDistGen.alphabet);
-			System.out.println(pitchProbDistGen.alphabet_counts);
-			*/
 }

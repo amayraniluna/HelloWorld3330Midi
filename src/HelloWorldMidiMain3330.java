@@ -126,9 +126,14 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		}
 		else if(key == '1') {
 			myTest.runUnit1(pitchGenerator, rhythmGenerator);
+			playMidiFile(filePath);
 		}
 		else if(key == '2') {
 			myTest.runUnit2(pitchGenerator, rhythmGenerator);
+			player.reset();
+			player.setMelody(pitchGenerator.generate(20));
+			player.setRhythm(rhythmGenerator.generate(20));
+			player.play();
 		}
 		else if(key == '3') {
 			myTest.runUnit3(pitchGenerator, rhythmGenerator);

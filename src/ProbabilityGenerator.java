@@ -9,6 +9,7 @@ public class ProbabilityGenerator<T> {
 	ArrayList<T> alphabet;
 	ArrayList<Integer> alphabet_counts;
 	ArrayList<Double> probDistributions;
+	double inputTokens = 0.0;
 	
 	
 	ProbabilityGenerator()
@@ -29,23 +30,28 @@ public class ProbabilityGenerator<T> {
 	void train(ArrayList<T> newTokens)
 	{
 		int index;
-		double inputTokens = 0.0;
+		
 	   //filling in alphabet + alphabet_count list
 		for(int i = 0 ; i < newTokens.size() ; i++) 
 		{
 	        inputTokens++;
 			index = alphabet.indexOf(newTokens.get(i));
-			if(index == -1) 
+			
+		   //if token not found in alphabet add token to alphabet 
+			if(index == -1)
 			{
 				index = alphabet.size();
 				alphabet.add(newTokens.get(i));
 				alphabet_counts.add(0);
 			}
+			
 			alphabet_counts.set(index, (alphabet_counts.get(index)) + 1);
 		}
 		
-	  //calculating probability distributions
-		for(int i = 0 ; i < alphabet_counts.size() ; i++) 
+		probDistributions.clear();
+		
+	   //calculating probability distributions
+	 	for(int i = 0 ; i < alphabet_counts.size() ; i++) 
 		{
 			double probability;
 			probability = ((alphabet_counts.get(i)).floatValue()) / inputTokens;
@@ -59,13 +65,14 @@ public class ProbabilityGenerator<T> {
 	{
 		System.out.println("-----Probability Distribution-----");
 		System.out.println();
-		System.out.println("PD size: " + probDistributions.size());
+
 		for(int i = 0 ; i < probDistributions.size(); i++) {
 			System.out.println("Token: " + alphabet.get(i) + " | " + "Probability: " + probDistributions.get(i));
 		}
 		System.out.println("----------");
 		System.out.println();
 	}
+	
 	
 	
 	
@@ -105,6 +112,7 @@ public class ProbabilityGenerator<T> {
 	
 	ArrayList<T> generate(int length)
 	{
+		//generating a melody of size length
 		ArrayList<T> newSequence = new ArrayList<T>();
 		for(int i = 0 ; i < length ; i++) {
 			newSequence.add(generate());
