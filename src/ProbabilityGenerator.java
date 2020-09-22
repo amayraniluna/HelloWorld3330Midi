@@ -5,13 +5,13 @@ import java.util.ArrayList;
 //Description: taking in notes to train probability generator and using those notes to generate a new melody in real-time.
 
 public class ProbabilityGenerator<T> {
-	
+	//class variables
 	ArrayList<T> alphabet;
 	ArrayList<Integer> alphabet_counts;
 	ArrayList<Double> probDistributions;
 	double inputTokens = 0.0;
 	
-	
+	//class functions
 	ProbabilityGenerator()
 	{
 		alphabet = new ArrayList<T>();
