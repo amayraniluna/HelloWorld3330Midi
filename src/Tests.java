@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Tests{
-	  //UNIT TEST 1	
-		void runUnit1(ProbabilityGenerator<Integer> pitchGen, ProbabilityGenerator<Double> rhythmGen){
+	  // PROJECT 1 UNIT TEST 1	
+		void p1runUnit1(ProbabilityGenerator<Integer> pitchGen, ProbabilityGenerator<Double> rhythmGen){
 			
 			System.out.println("\nPitches:\n");
 			pitchGen.print();
@@ -13,8 +13,8 @@ public class Tests{
 			
 		}
 		
-	  //UNIT TEST 2
-		void runUnit2(ProbabilityGenerator<Integer> pitchGen, ProbabilityGenerator<Double> rhythmGen) {
+	  //PROJECT 1 UNIT TEST 2
+		void p1runUnit2(ProbabilityGenerator<Integer> pitchGen, ProbabilityGenerator<Double> rhythmGen) {
 			System.out.println(" Generated Pitches: ");
 			System.out.println(pitchGen.generate(20));
 		
@@ -23,8 +23,8 @@ public class Tests{
 		}
 		
 		
-		//UNIT TEST 3
-		void runUnit3(ProbabilityGenerator<Integer> pitchGen, ProbabilityGenerator<Double> rhythmGen) 
+		//PROJECT 1 UNIT TEST 3
+		void p1runUnit3(ProbabilityGenerator<Integer> pitchGen, ProbabilityGenerator<Double> rhythmGen) 
 		{
 			//creating Probability Generators to train on generated melodies
 			ProbabilityGenerator<Integer> pitchTrainer = new ProbabilityGenerator<Integer>();
@@ -44,6 +44,13 @@ public class Tests{
 				
 			}
 				
-			runUnit1(pitchTrainer, rhythmTrainer);//printing probability distributions
+			p1runUnit1(pitchTrainer, rhythmTrainer);//printing probability distributions
 		}
+		
+		
+		//PROJECT 2 UNIT TEST 1
+		void p2runUnit1(ProbabilityGenerator<Integer> pitchGen, ProbabilityGenerator<Double> rhythmGen) {
+			
+		}
+		
 }

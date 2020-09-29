@@ -120,14 +120,17 @@ public class HelloWorldMidiMain3330 extends PApplet {
 			println("Melody started!");
 		}
 		else if(key == '1') {
-			myTest.runUnit1(pitchGenerator, rhythmGenerator);
+			myTest.p1runUnit1(pitchGenerator, rhythmGenerator);
 
 		}
 		else if(key == '2') {
-			myTest.runUnit2(pitchGenerator, rhythmGenerator);
+			myTest.p1runUnit2(pitchGenerator, rhythmGenerator);
 		}
 		else if(key == '3') {
-			myTest.runUnit3(pitchGenerator, rhythmGenerator);
+			myTest.p1runUnit3(pitchGenerator, rhythmGenerator);
+		}
+		else if(key == '4') {
+			myTest.p2runUnit1(pitchGenerator, rhythmGenerator);
 		}
 	}
 }
