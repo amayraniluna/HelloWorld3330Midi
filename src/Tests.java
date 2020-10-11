@@ -49,8 +49,14 @@ public class Tests{
 		
 		
 		//PROJECT 2 UNIT TEST 1
-		void p2runUnit1(ProbabilityGenerator<Integer> pitchGen, ProbabilityGenerator<Double> rhythmGen) {
+		void p2runUnit1(MarkovGenerator<Integer> pitchGen, MarkovGenerator<Double> rhythmGen) {
+			System.out.print("\nPitches:\n");
+			pitchGen.tablePrint();
 			
+			System.out.println();
+				
+			System.out.print("Rhythms:\n");
+			rhythmGen.tablePrint();
 		}
 		
 }

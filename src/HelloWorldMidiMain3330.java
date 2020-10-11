@@ -32,6 +32,8 @@ public class HelloWorldMidiMain3330 extends PApplet {
 	//create generator for pitch and rhythm
 	ProbabilityGenerator<Integer> pitchGenerator = new ProbabilityGenerator<Integer>();
 	ProbabilityGenerator<Double> rhythmGenerator = new ProbabilityGenerator<Double>();
+	MarkovGenerator<Integer> markovPitchGenerator = new MarkovGenerator<Integer>();
+	MarkovGenerator<Double> markovRhythmGenerator = new MarkovGenerator<Double>();
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -50,7 +52,7 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		fill(120, 50, 240);
 		
 		// returns a url
-		String filePath = getPath("mid/gardel_por.mid");
+		String filePath = getPath("mid/MaryHadALittleLamb.mid");
 		playMidiFile(filePath);
 
 		midiNotes = new MidiFileToNotes(filePath); //creates a new MidiFileToNotes -- reminder -- ALL objects in Java must 
@@ -64,12 +66,14 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		//training
 		pitchGenerator.train(midiNotes.getPitchArray());
 		rhythmGenerator.train(midiNotes.getRhythmArray());
+		markovPitchGenerator.train(midiNotes.getPitchArray());
+		markovRhythmGenerator.train(midiNotes.getRhythmArray());
 		
 	
 		player = new MelodyPlayer(this, 100.0f);
 		player.setup();
-		player.setMelody( pitchGenerator.generate(20) );
-		player.setRhythm( rhythmGenerator.generate(20) );
+		//player.setMelody( pitchGenerator.generate(20) );
+		//player.setRhythm( rhythmGenerator.generate(20) );
 	}
 
 	public void draw() {
@@ -77,9 +81,10 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		
 		textSize(12);
 		fill(0, 102, 153);
-		text("Press 1 to print probability distributions", width/13, height/4);
+		text("Press 1 to print probability distributions", width/13, height/6);
 		text("Press 2 to generate random melodies", width/13, height/3);
 		text("Press 3 to generate 10,000 random melodies", width/13, height/2);
+		text("Press 4 to print transition table", width/13, 2*height/3);
 	}
 
 	//this finds the absolute path of a file
@@ -121,6 +126,7 @@ public class HelloWorldMidiMain3330 extends PApplet {
 		}
 		else if(key == '1') {
 			myTest.p1runUnit1(pitchGenerator, rhythmGenerator);
+			player.play();
 
 		}
 		else if(key == '2') {
@@ -130,7 +136,7 @@ public class HelloWorldMidiMain3330 extends PApplet {
 			myTest.p1runUnit3(pitchGenerator, rhythmGenerator);
 		}
 		else if(key == '4') {
-			myTest.p2runUnit1(pitchGenerator, rhythmGenerator);
+			myTest.p2runUnit1(markovPitchGenerator, markovRhythmGenerator);
 		}
 	}
 }
